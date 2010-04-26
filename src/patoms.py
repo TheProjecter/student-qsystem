@@ -11,9 +11,9 @@ modification, are permitted provided that the following conditions are met:
     * Redistributions in binary form must reproduce the above copyright
       notice, this list of conditions and the following disclaimer in the
       documentation and/or other materials provided with the distribution.
-    * Neither the name of the <organization> nor the
-      names of its contributors may be used to endorse or promote products
-      derived from this software without specific prior written permission.
+    * Neither the name of the KRLAB nor the names of its contributors may be
+      used to endorse or promote products derived from this software without
+      specific prior written permission.
 
 THIS SOFTWARE IS PROVIDED BY GREGORY GELFOND ``AS IS'' AND ANY
 EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -27,7 +27,9 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-import optparse, re, sys
+import optparse
+import re
+import sys
 
 DEFINED_SOLVERS = [
     "dlv",
@@ -35,12 +37,10 @@ DEFINED_SOLVERS = [
     "clasp",
 ]
 
-# utility classes
-
 class UndefinedAnswerSetSolverException(Exception):
     """
-    Defines a class for representing exceptions which are thrown in the event of
-    an undefined prolog interpreter being specified.
+    Defines a class for representing exceptions which are thrown in the
+    event of an undefined prolog interpreter being specified.
     """
     def __init__(self, solver):
         super(UndefinedAnswerSetSolverException, self).__init__()
@@ -54,25 +54,27 @@ class UndefinedAnswerSetSolverException(Exception):
     
 
 
-# utility functions
-
 def parse_options():
     """
-    Returns the options passed to the program. Options are parsed from sys.argv.
+    Returns the options passed to the program. Options are parsed
+    from sys.argv.
     """
     parser = optparse.OptionParser()
-    parser.add_option("-a", "--aprolog", action="store_true", dest = "aprolog",
-                      help = "output models as A-Prolog code")
-    parser.add_option("-s", "--solver", dest = "solver", default = "dlv",
-                      help = "define the system providing the input stream (defaults to dlv)")
+    parser.add_option("-a", "--aprolog", action = "store_true",
+                      dest = "aprolog", help = "output models as A-Prolog code")
+    parser.add_option("-s", "--solver", dest = "solver", default = "clasp",
+                      help = "define the system providing the input stream")
+    parser.add_option("-f", "--file", dest = "filename",
+                      help = "specifies the name of the input file",
+                      metavar = "FILE")
     (options, args) = parser.parse_args()
     return options
 
 
 def is_valid_solver(solver):
     """
-    Returns True if solver is an answer set solver known by the query system,
-    and False otherwise.
+    Returns True if solver is an answer set solver known by the query
+    system, and False otherwise.
     """
     return solver in DEFINED_SOLVERS
 
@@ -103,8 +105,8 @@ def clasp_text(text):
 
 def literals_in_model(text):
     """
-    Given a string whose contents represent a model, returns a list of all of
-    literals making up the model.
+    Given a string whose contents represent a model, returns a list
+    of all of the literals making up the model.
     """
     return [literal.rstrip(",") for literal in text.split()]
 
@@ -113,8 +115,12 @@ def write_as_text(model):
     """
     Writes the model as plain text.
     """
-    for literal in literals_in_model(model):
-        print literal
+    literals = literals_in_model(model)
+    if len(literals) == 0:
+        print "{}"
+    else:
+        for literal in literals_in_model(model):
+            print literal
     print "::endmodel"
 
 
@@ -139,8 +145,8 @@ def select_writer(output_as_code):
 
 def write_output(options, models):
     """
-    Given a list of models, write the models. By default models are written to stdout.
-    If no models are found nothing is written.
+    Given a list of models, write the models. By default models are
+    written to stdout. If no models are found nothing is written.
     """
     writer = select_writer(options.aprolog)
     map(writer, models)
@@ -148,12 +154,11 @@ def write_output(options, models):
 
 def rewrite_text(options, text):
     """
-    Rewrites the answer sets denoted by text according to the specified
-    command-line options.
+    Rewrites the given text according to the method specified by the
+    given options.
     """
     if not is_valid_solver(options.solver):
         raise UndefinedAnswerSetSolverException(options.solver)
-    
     if options.solver == "dlv":
         models = dlv_text(text)
     elif options.solver == "smodels":
@@ -163,14 +168,26 @@ def rewrite_text(options, text):
     write_output(options, models)
 
 
-# main function
+def input_source(options):
+    """
+    Returns the input source from which to read data. If a file is specified
+    by the command-line options, an open file stream to this file is returned.
+    Otherwise sys.stdin is returned.
+    """
+    source = sys.stdin
+    if options.filename != None:
+        source = open(options.filename, "r")
+    return source
+
 
 def main():
     """
-    Reformats the contents of stdin.
+    Reformats the contents of stdin according to the options specified
+    in sys.argv.
     """
     options = parse_options()
-    text = sys.stdin.read()
+    source = input_source(options)
+    text = source.read()
     rewrite_text(options, text)
 
 
