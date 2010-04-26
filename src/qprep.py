@@ -108,10 +108,10 @@ def normalize_input(model_data):
 # main function
 
 def main():
-	"""
-	Main entry point into qprep. Formats all of the literals on the
-	input source specified by sys.argv for use by qsystem.
-	"""
+    """
+    Main entry point into qprep. Formats all of the literals on the
+    input source specified by sys.argv for use by qsystem.
+    """
     model_data = [x.strip() for x in get_input_source().readlines()]
     normalize_input(model_data)
 

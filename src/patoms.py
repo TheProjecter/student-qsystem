@@ -147,10 +147,10 @@ def write_output(options, models):
 
 
 def rewrite_text(options, text):
-	"""
-	Rewrites the answer sets denoted by text according to the specified
-	command-line options.
-	"""
+    """
+    Rewrites the answer sets denoted by text according to the specified
+    command-line options.
+    """
     if not is_valid_solver(options.solver):
         raise UndefinedAnswerSetSolverException(options.solver)
     

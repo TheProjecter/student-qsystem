@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!-- Document Header and CSS Styles -->
 <head>
-	<title>QSystem Readme</title> <style type="text/css">
+    <title>QSystem Readme</title> <style type="text/css">
 /*<![CDATA[*/
         <!--
         a:link
@@ -55,21 +55,21 @@
 <!-- Installation -->
 <h2>Installation</h2> 
 <p>
-	The installation instructions already assume that the following are installed and are accessible from your path:
+    The installation instructions already assume that the following are installed and are accessible from your path:
 </p>
 <ul>
-	<li>
-		An answer set solver (currently clasp, dlv, and smodels are supported).
-	</li>
-	<li>
-		A Python interpreter (version 2.5 and greater).
-	</li>
-	<li>
-		A Prolog interpreter (currently the system has been tested with Sicstus and SWI).
-	</li>
+    <li>
+        An answer set solver (currently clasp, dlv, and smodels are supported).
+    </li>
+    <li>
+        A Python interpreter (version 2.5 and greater).
+    </li>
+    <li>
+        A Prolog interpreter (currently the system has been tested with Sicstus and SWI).
+    </li>
 </ul>
 <p>
-	Once the file qsystem.zip has been downloaded, extract the files to some directory on your path (normally somewhere in your home directory). Next, create an environment variable <code>'QSYSTEM'</code> which points to this directory. On UNIX system (and on Mac OS X) if you are using the Bourne shell (bash) this can be done as by adding the following line to the file <code>.profile</code> in the root of my home directory (assuming that I extracted qsystem to the directory <code>$HOME/Scripts/qsystem</code>):
+    Once the file qsystem.zip has been downloaded, extract the files to some directory on your path (normally somewhere in your home directory). Next, create an environment variable <code>'QSYSTEM'</code> which points to this directory. On UNIX system (and on Mac OS X) if you are using the Bourne shell (bash) this can be done as by adding the following line to the file <code>.profile</code> in the root of my home directory (assuming that I extracted qsystem to the directory <code>$HOME/Scripts/qsystem</code>):
 </p>
 <pre>
     <code>
@@ -88,36 +88,36 @@ Lastly make sure that the files qsystem.py, qprep.py, and patoms.py are executab
 </pre><!-- Usage -->
 <h2>Usage</h2> 
 <p>
-	QSystem is designed as a command-line application and may be run as follows:
+    QSystem is designed as a command-line application and may be run as follows:
 </p>
 <pre>
     <code>qsystem.py --prolog=swi --solver=clasp --file=sample.lp</code> 
 </pre> 
 <p>
-	QSystem is defined with the following command-line options:
+    QSystem is defined with the following command-line options:
 </p>
 <table border="1" cellpadding="5" summary="argument descriptions">
-	<tr>
-		<td><pre><code>-h, --help</code></pre></td>
-		<td><em>Show a help message and exit.</em></td>
-	</tr>
-	<tr>
-		<td><pre><code>-p PROLOG, --prolog=PROLOG</code></pre></td>
-		<td><em>Specify the Prolog interpreter to use (defaults to sicstus).</em> Currently the supported Prolog interpreters are SWI-Prolog and Sicstus.</td>
-	</tr>
-	<tr>
-	    <td><pre><code>-s SOLVER, --solver=SOLVER</code></pre></td>
-	    <td><em>Specify the answer-set solver to use (defaults to dlv).</em> Currently the supported solvers are dlv, smodels, and clasp.</td>
-	</tr>
-	<tr>
-	    <td><pre><code>-f FILE, --file=FILE</code></pre></td>
-	    <td><em>Specify the name of the logic program to use as a knowledge base.</em></td>
-	</tr>
+    <tr>
+        <td><pre><code>-h, --help</code></pre></td>
+        <td><em>Show a help message and exit.</em></td>
+    </tr>
+    <tr>
+        <td><pre><code>-p PROLOG, --prolog=PROLOG</code></pre></td>
+        <td><em>Specify the Prolog interpreter to use (defaults to sicstus).</em> Currently the supported Prolog interpreters are SWI-Prolog and Sicstus.</td>
+    </tr>
+    <tr>
+        <td><pre><code>-s SOLVER, --solver=SOLVER</code></pre></td>
+        <td><em>Specify the answer-set solver to use (defaults to dlv).</em> Currently the supported solvers are dlv, smodels, and clasp.</td>
+    </tr>
+    <tr>
+        <td><pre><code>-f FILE, --file=FILE</code></pre></td>
+        <td><em>Specify the name of the logic program to use as a knowledge base.</em></td>
+    </tr>
 </table>
 <!-- Queries -->
 <h2>Queries</h2> 
 <p>
-	Suppose that we have the following logic program <code>test.lp</code>:
+    Suppose that we have the following logic program <code>test.lp</code>:
 </p>
 <pre>
     <code>
@@ -128,7 +128,7 @@ Lastly make sure that the files qsystem.py, qprep.py, and patoms.py are executab
     </code>
 </pre> 
 <p>
-	To query this program we invoke QSystem using the answer set solver DLV and the Sicstus Prolog system (make sure that you are calling the system from the directory in which qsystem has been installed):
+    To query this program we invoke QSystem using the answer set solver DLV and the Sicstus Prolog system (make sure that you are calling the system from the directory in which qsystem has been installed):
 </p>
 <pre>
     <code>
@@ -146,10 +146,10 @@ Lastly make sure that the files qsystem.py, qprep.py, and patoms.py are executab
     </code>
 </pre> 
 <p>
-	QSystem loads a number of related modules and brings the user to a standard Prolog prompt. At the prompt the user may ask any defined Prolog query. The remainder of this readme focuses solely on those queries defined by QSystem.
+    QSystem loads a number of related modules and brings the user to a standard Prolog prompt. At the prompt the user may ask any defined Prolog query. The remainder of this readme focuses solely on those queries defined by QSystem.
 </p>
 <p>
-	QSystem provides a single set of queries of the form <code>query(Term, Result)</code>. To check whether or not the term <code>x</code> is positively entailed by our logic program, we use the following query:
+    QSystem provides a single set of queries of the form <code>query(Term, Result)</code>. To check whether or not the term <code>x</code> is positively entailed by our logic program, we use the following query:
 </p>
 <pre>
     <code>
@@ -158,7 +158,7 @@ Lastly make sure that the files qsystem.py, qprep.py, and patoms.py are executab
     </code>
 </pre> 
 <p>
-	To check if <code>b</code> is negatively entailed we ask the following query:
+    To check if <code>b</code> is negatively entailed we ask the following query:
 </p>
 <pre>
     <code>
@@ -167,7 +167,7 @@ Lastly make sure that the files qsystem.py, qprep.py, and patoms.py are executab
     </code>
 </pre> 
 <p>
-	As <code>p</code> is neither positively nor negatively entailed, the following query returns <code>maybe</code>:
+    As <code>p</code> is neither positively nor negatively entailed, the following query returns <code>maybe</code>:
 </p>
 <pre>
     <code>
@@ -176,7 +176,7 @@ Lastly make sure that the files qsystem.py, qprep.py, and patoms.py are executab
     </code>
 </pre> 
 <p>
-	Furthermore, to find the set of all terms which are positively entailed by our logic program we use the following query:
+    Furthermore, to find the set of all terms which are positively entailed by our logic program we use the following query:
 </p>
 <pre>
     <code>
@@ -185,24 +185,24 @@ Lastly make sure that the files qsystem.py, qprep.py, and patoms.py are executab
     </code>
 </pre> 
 <p>
-	In short, <code>query(Term, Result)</code> is defined as follows:
+    In short, <code>query(Term, Result)</code> is defined as follows:
 </p>
 <ul>
-	<li>
-		If the term is positively entailed, <code>Result = yes</code>.
-	</li>
-	<li>
-		If the term is negatively entailed, <code>Result = no</code>.
-	</li>
-	<li>
-		If the term is neither positively nor negatively entailed, <code>Result = maybe</code>.
-	</li>
+    <li>
+        If the term is positively entailed, <code>Result = yes</code>.
+    </li>
+    <li>
+        If the term is negatively entailed, <code>Result = no</code>.
+    </li>
+    <li>
+        If the term is neither positively nor negatively entailed, <code>Result = maybe</code>.
+    </li>
 </ul>
 <p>
-	As in all Prolog systems, the query need not be entered in ground form.
+    As in all Prolog systems, the query need not be entered in ground form.
 </p>
 <p>
-	Lastly, to exit the system use the standard Prolog command <code>halt.</code>
+    Lastly, to exit the system use the standard Prolog command <code>halt.</code>
 </p>
 </body>
 </html>
