@@ -1,0 +1,2 @@
+qsystem is program that is designed to query the answer sets of a logic program by clasp, dlv, or smodels within an
+interactive Prolog environment. The primary goal is to provide a means to check what is (or is not entailed) entailed by the given program. The system is developed in a polyglot style as a combination of modules, some in Python, and others in Prolog.
